@@ -27,7 +27,7 @@ if [ -a "$DE_TMPFILE" ]
 if [ -z $( ipset list -n | grep ^"$DE_IPSETNAME"$ ) ]
   then
   echo "WARNING: IPset $DE_IPSETNAME doesnt exist, creating new"
-  ipset create $DE_IPSETNAME hash:net
+  ipset create $DE_IPSETNAME hash:ip
   fi
 
 if [ -z "$( iptables-save | grep $DE_IPSETNAME )" ]
