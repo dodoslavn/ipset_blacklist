@@ -59,7 +59,7 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
     do
     if [ -z "$( echo "$COUNTRY_CURRENT" | grep "$SUBNET" )" ]
       then
-      if [ "$C" -gt 0  && "$C_OLD" -ne "$C" ]
+      if [ "$C" -gt 0 ] && [ "$C_OLD" -ne "$C" ]
         then
         echo
         fi
