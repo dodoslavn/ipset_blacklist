@@ -30,7 +30,7 @@ COUNTRY_COMPLETELIST="$( grep "aggregated.zone" $COUNTRY_FILE".txt" | cut -d'"' 
 
 echo "INFO: Found list of "$( echo "$COUNTRY_COMPLETELIST" | wc -l )" countries"
 
-IFS=" "
+
 for COUNTRY_NAME in $COUNTRY_BLOCK
   do
   if [ -z "$( echo "$COUNTRY_COMPLETELIST" | grep ^"$COUNTRY_NAME"$ )" ]
@@ -69,7 +69,7 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
     
   echo "INFO: $C subnets were added to $COUNTRY_NAME."
   rm -f $COUNTRY_FILE"_"$COUNTRY_NAME".txt"
-  IFS=" "
+
   done
   
 rm -f $COUNTRY_FILE".txt"
