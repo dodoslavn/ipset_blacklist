@@ -53,6 +53,7 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
 
   C=0
   COUNTRY_CURRENT="$( ipset list "$COUNTRY_IPSETNAME""$COUNTRY_NAME" )"
+  IFS=$'\n'
   for SUBNET in $( cat $COUNTRY_FILE"_"$COUNTRY_NAME".txt" )
     do
     if [ -z "$( echo " COUNTRY_CURRENT" | grep "$SUBNET" )" ]
