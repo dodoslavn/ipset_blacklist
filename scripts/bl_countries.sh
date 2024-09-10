@@ -30,6 +30,15 @@ COUNTRY_COMPLETELIST="$( grep "aggregated.zone" $COUNTRY_FILE".txt" | cut -d'"' 
 
 echo "INFO: Found list of "$( echo "$COUNTRY_COMPLETELIST" | wc -l )" countries"
 
+for COUNTRY_NAME in "$( echo $COUNTRY_BLOCK )"
+  do
+  if [ -z "$( echo "$COUNTRY_COMPLETELIST" | grep ^"$COUNTRY_NAME"$ )" ]
+    then
+    echo "ERROR: Country $COUNTRY_NAME was not found in the list!"
+    exit 2
+    fi
+  done
+
 exit
 
 COUNTRY_URL="http://www.ipdeny.com/ipblocks/data/aggregated/ru-aggregated.zone"
