@@ -30,7 +30,7 @@ COUNTRY_COMPLETELIST="$( grep "aggregated.zone" $COUNTRY_FILE".txt" | cut -d'"' 
 
 echo "INFO: Found list of "$( echo "$COUNTRY_COMPLETELIST" | wc -l )" countries"
 
-IFS=$'\ '
+IFS=" "
 for COUNTRY_NAME in "$( echo $COUNTRY_BLOCK )"
   do
   if [ -z "$( echo "$COUNTRY_COMPLETELIST" | grep ^"$COUNTRY_NAME"$ )" ]
