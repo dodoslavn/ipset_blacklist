@@ -1,5 +1,3 @@
-
-#COUNTRY_URL="http://www.ipdeny.com/ipblocks/data/aggregated/ru-aggregated.zone"
 COUNTRY_URL="http://www.ipdeny.com/ipblocks/data/aggregated"
 COUNTRY_FILE="/tmp/bl_country"
 COUNTRY_RULE="DROP"
@@ -10,3 +8,8 @@ SMAPHAUS_URL="https://www.spamhaus.org/drop/drop.txt"
 SPAMHAUS_TMPFILE="/tmp/bl_spamhaus.txt"
 SPAMHAUS_RULE="DROP"
 SPAMHAUS_IPSETNAME="blacklist_spamhaus"
+
+DE_URL="https://lists.blocklist.de/lists/all.txt"
+DE_TMPFILE="/tmp/bl_de.txt"
+DE_RULE="DROP"
+DE_IPSETNAME="blacklist_de"
