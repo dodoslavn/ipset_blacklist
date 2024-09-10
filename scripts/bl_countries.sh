@@ -58,7 +58,7 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
     do
     if [ -z "$( echo "$COUNTRY_CURRENT" | grep "$SUBNET" )" ]
       then
-      echo "INFO: Adding "$SUBNET" to "$COUNTRY_CURRENT
+      echo "INFO: Adding "$SUBNET" to "$COUNTRY_NAME
       ipset add "$COUNTRY_IPSETNAME""$COUNTRY_NAME" $SUBNET
       exit
     else
