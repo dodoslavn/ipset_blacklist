@@ -50,6 +50,7 @@ for SUBNET in $( grep \. $DE_TMPFILE )
   else
     #echo "INFO: Subnet $SUBNET is already added."
     C=$(( $C + 1 ))
+    echo -n "."
     fi 
   done
   
