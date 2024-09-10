@@ -63,6 +63,7 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
     else
       #echo "INFO: Subnet $SUBNET is already added."
       C=$(( $C + 1 ))
+      echo -n "."
       fi 
     done
   echo "INFO: $C subnets were added to $COUNTRY_NAME."
