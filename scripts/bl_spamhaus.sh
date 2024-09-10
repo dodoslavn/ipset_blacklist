@@ -32,10 +32,17 @@ if [ -z "$( iptables-save | grep $SPAMHAUS_IPSETNAME )" ]
 
 wget $SMAPHAUS_URL -O $SPAMHAUS_TMPFILE
 
+SPAMHAUS_CURRENT="$( ipset list $SPAMHAUS_IPSETNAME )"
+
 for SUBNET in $( grep ^[0-9] $SPAMHAUS_TMPFILE | cut -d';' -f1 )
   do
-  echo "INFO: Adding "$SUBNET
-  ipset add $SPAMHAUS_IPSETNAME $SUBNET
+  if [ -z "$( echo "$SPAMHAUS_CURRENT" | grep ^"$SUBNET"$)"
+    then
+    echo "INFO: Adding "$SUBNET
+    ipset add $SPAMHAUS_IPSETNAME $SUBNET
+  else
+    echo "INFO: Subnet $SUBNET is already added."
+    fi 
   done
 
 rm -f $SPAMHAUS_TMPFILE
