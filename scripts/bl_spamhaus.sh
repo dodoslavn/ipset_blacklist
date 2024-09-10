@@ -34,6 +34,7 @@ wget $SMAPHAUS_URL -O $SPAMHAUS_TMPFILE
 
 SPAMHAUS_CURRENT="$( ipset list $SPAMHAUS_IPSETNAME )"
 
+C=0
 for SUBNET in $( grep ^[0-9] $SPAMHAUS_TMPFILE | cut -d';' -f1 )
   do
   if [ -z "$( echo "$SPAMHAUS_CURRENT" | grep "$SUBNET" )" ]
@@ -41,8 +42,10 @@ for SUBNET in $( grep ^[0-9] $SPAMHAUS_TMPFILE | cut -d';' -f1 )
     echo "INFO: Adding "$SUBNET
     ipset add $SPAMHAUS_IPSETNAME $SUBNET
   else
-    echo "INFO: Subnet $SUBNET is already added."
+    #echo "INFO: Subnet $SUBNET is already added."
+    C=$(( $C + 1 ))
     fi 
   done
-
+  
+echo "INFO: $C subnets were already added."
 rm -f $SPAMHAUS_TMPFILE
