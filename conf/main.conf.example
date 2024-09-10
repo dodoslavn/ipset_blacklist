@@ -1,1 +1,7 @@
 
+
+
+SMAPHAUS_URL="https://www.spamhaus.org/drop/drop.txt"
+SPAMHAUS_TMPFILE="/tmp/bl_spamhaus.txt"
+SPAMHAUS_RULE="DROP"
+SPAMHAUS_IPSETNAME="blacklist_spamhaus"
