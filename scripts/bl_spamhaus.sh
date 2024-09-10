@@ -36,7 +36,7 @@ SPAMHAUS_CURRENT="$( ipset list $SPAMHAUS_IPSETNAME )"
 
 for SUBNET in $( grep ^[0-9] $SPAMHAUS_TMPFILE | cut -d';' -f1 )
   do
-  if [ -z "$( echo "$SPAMHAUS_CURRENT" | grep "^$SUBNET$" )"
+  if [ -z "$( echo "$SPAMHAUS_CURRENT" | grep "$SUBNET" )"
     then
     echo "INFO: Adding "$SUBNET
     ipset add $SPAMHAUS_IPSETNAME $SUBNET
