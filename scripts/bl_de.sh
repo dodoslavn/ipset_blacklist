@@ -41,10 +41,16 @@ wget $DE_URL -O $DE_TMPFILE
 DE_CURRENT="$( ipset list $DE_IPSETNAME )"
 
 C=0
+C_OLD=0
 for SUBNET in $( grep \. $DE_TMPFILE )
   do
   if [ -z "$( echo "$DE_CURRENT" | grep "$SUBNET" )" ]
     then
+    if [ "$C" -gt 0 ] && [ "$C_OLD" -ne "$C" ]
+      then
+      echo
+      fi
+    C_OLD=$C
     echo "INFO: Adding "$SUBNET
     ipset add $DE_IPSETNAME $SUBNET
   else
@@ -53,6 +59,10 @@ for SUBNET in $( grep \. $DE_TMPFILE )
     echo -n "."
     fi 
   done
-  
+
+if [ "$C" -gt 0 ]
+  then
+  echo
+  fi
 echo "INFO: $C subnets were already added."
 rm -f $DE_TMPFILE
