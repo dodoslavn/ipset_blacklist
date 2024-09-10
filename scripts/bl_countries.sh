@@ -38,6 +38,12 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
     echo "ERROR: Country $COUNTRY_NAME was not found in the list!"
     exit 2
     fi
+  wget "http://www.ipdeny.com/ipblocks/data/aggregated/"$COUNTRY_NAME"-aggregated.zone" -O $COUNTRY_FILE""$COUNTRY_NAME".txt"
+  if [ -z $( ipset list -n | grep ^"$COUNTRY_IPSETNAME""$COUNTRY_NAME"$ ) ]
+    then
+    echo "WARNING: IPset "$COUNTRY_IPSETNAME""$COUNTRY_NAME" doesnt exist, creating new"
+    ipset create "$COUNTRY_IPSETNAME""$COUNTRY_NAME" hash:net
+    fi
   done
 
 exit
