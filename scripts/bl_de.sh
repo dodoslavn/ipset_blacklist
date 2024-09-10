@@ -41,7 +41,7 @@ wget $DE_URL -O $DE_TMPFILE
 DE_CURRENT="$( ipset list $DE_IPSETNAME )"
 
 C=0
-for SUBNET in $( grep ^[0-9] $DE_TMPFILE | cut -d';' -f1 )
+for SUBNET in $( grep \. $DE_TMPFILE )
   do
   if [ -z "$( echo "$DE_CURRENT" | grep "$SUBNET" )" ]
     then
