@@ -42,7 +42,7 @@ DE_CURRENT="$( ipset list $DE_IPSETNAME )"
 
 C=0
 C_OLD=0
-for SUBNET in $( grep \. $DE_TMPFILE )
+for SUBNET in $( grep '\.' $DE_TMPFILE )
   do
   if [ -z "$( echo "$DE_CURRENT" | grep "$SUBNET" )" ]
     then
