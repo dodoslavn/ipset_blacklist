@@ -50,12 +50,20 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
     echo "WARNING: IPset "$COUNTRY_IPSETNAME""$COUNTRY_NAME" is not applied in iptables, applying"
     iptables -I INPUT 1 -m set --match-set "$COUNTRY_IPSETNAME""$COUNTRY_NAME" src -j $COUNTRY_RULE
     fi
+
+  C=0
+  COUNTRY_CURRENT="$( ipset list "$COUNTRY_IPSETNAME""$COUNTRY_NAME" )"
+  for SUBNET in $( $COUNTRY_FILE"_"$COUNTRY_NAME".txt" )
+    do
+    if [ -z "$( echo " COUNTRY_CURRENT" | grep "$SUBNET" )" ]
+      then
+      echo "INFO: Adding "$SUBNET
+      ipset add "$COUNTRY_IPSETNAME""$COUNTRY_NAME" $SUBNET
+    else
+      #echo "INFO: Subnet $SUBNET is already added."
+      C=$(( $C + 1 ))
+      fi 
+    done
+  echo "INFO: $C subnets were added to $COUNTRY_NAME."
   done
 
-exit
-
-COUNTRY_URL="http://www.ipdeny.com/ipblocks/data/aggregated/ru-aggregated.zone"
-COUNTRY_FILE="/tmp/bl_country"
-COUNTRY_RULE="DROP"
-COUNTRY_IPSETNAME="blacklist_country_"
-COUNTRY_BLOCK="ru cn"
