@@ -65,5 +65,7 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
       fi 
     done
   echo "INFO: $C subnets were added to $COUNTRY_NAME."
+  rm -f $COUNTRY_FILE"_"$COUNTRY_NAME".txt"
   done
+rm -f $COUNTRY_FILE".txt"
 
