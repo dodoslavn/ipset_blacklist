@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")"
 
-if [ "$( whoamo )" != "root" ]
+if [ "$( whoami )" != "root" ]
   then
   echo "ERROR: You need to be root!"
   exit 2
