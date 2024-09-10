@@ -60,6 +60,7 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
       then
       echo "INFO: Adding "$SUBNET" to "$COUNTRY_CURRENT
       ipset add "$COUNTRY_IPSETNAME""$COUNTRY_NAME" $SUBNET
+      exit
     else
       #echo "INFO: Subnet $SUBNET is already added."
       C=$(( $C + 1 ))
