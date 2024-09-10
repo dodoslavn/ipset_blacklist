@@ -52,19 +52,20 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
     fi
 
   C=0
+  C_OLD=0
   COUNTRY_CURRENT="$( ipset list "$COUNTRY_IPSETNAME""$COUNTRY_NAME" | grep ^[0-9] )"
   #IFS=$'\n'
   for SUBNET in $( cat $COUNTRY_FILE"_"$COUNTRY_NAME".txt" )
     do
     if [ -z "$( echo "$COUNTRY_CURRENT" | grep "$SUBNET" )" ]
       then
-      if [ "$C" -gt 0 ]
+      if [ "$C" -gt 0  && "$C_OLD" -ne "$C" ]
         then
         echo
         fi
+      C_OLD=$C
       echo "INFO: Adding "$SUBNET" to "$COUNTRY_NAME
       ipset add "$COUNTRY_IPSETNAME""$COUNTRY_NAME" $SUBNET
-
     else
       #echo "INFO: Subnet $SUBNET is already added."
       C=$(( $C + 1 ))
