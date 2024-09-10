@@ -28,7 +28,7 @@ wget $COUNTRY_URL -O $COUNTRY_FILE".txt"
 
 COUNTRY_COMPLETELIST="$( grep "aggregated.zone" $COUNTRY_FILE".txt" | cut -d'"' -f2 | cut -d'-' -f1 )"
 
-echo "$COUNTRY_COMPLETELIST"
+echo "INFO: Found list of "$( echo "$COUNTRY_COMPLETELIST" | wc -l )" countries"
 
 exit
 
