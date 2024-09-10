@@ -66,6 +66,10 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
       echo -n "."
       fi 
     done
+  if [ "$C" -gt 0 ]
+    then
+    echo
+    fi
     
   echo "INFO: $C subnets were already added to $COUNTRY_NAME."
   rm -f $COUNTRY_FILE"_"$COUNTRY_NAME".txt"
