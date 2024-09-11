@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")"
 cd ..
-FOLDER=$(pwd)"/refresh.sh"
+FOLDER=$(pwd)"/scripts/refresh.sh"
 cd - >/dev/null
 
 
