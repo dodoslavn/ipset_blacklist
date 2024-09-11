@@ -1,5 +1,5 @@
 TIMER='[Unit]
-Description=Run script to refresh my keys every hour
+Description=Run script to refresh blacklists for firewall
 
 [Timer]
 OnCalendar=hourly
