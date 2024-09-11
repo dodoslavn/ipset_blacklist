@@ -1,5 +1,7 @@
 #!/bin/bash
 
+date
+
 git pull
 
 cd "$(dirname "$0")"
@@ -19,3 +21,5 @@ if ! [ -a "../conf/main.conf" ]
 ./bl_countries.sh
 ./bl_de.sh
 ./bl_spamhaus.sh
+
+echo "##################"
