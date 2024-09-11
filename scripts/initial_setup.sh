@@ -16,8 +16,11 @@ if ! [ -a "../conf/main.conf" ]
 
 . ../conf/main.conf
 
-. ../conf/custom-ipset_blacklist.service.sh > /etc/systemd/system/"$SERVICE_NAME".service
-. ../conf/custom-ipset_blacklist.timer.sh > /etc/systemd/system/"$SERVICE_NAME".timer
+. ../conf/custom-ipset_blacklist.service.sh 
+echo "$SERVICE" > /etc/systemd/system/"$SERVICE_NAME".service
+
+. ../conf/custom-ipset_blacklist.timer.sh 
+echo "$TIMER" > /etc/systemd/system/"$SERVICE_NAME".timer
 
 systemctl daemon-reload
 systemctl enable $SERVICE_NAME
