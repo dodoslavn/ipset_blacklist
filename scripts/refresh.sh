@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git pull
+
 cd "$(dirname "$0")"
 
 if [ "$( whoami )" != "root" ]
