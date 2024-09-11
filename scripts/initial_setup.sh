@@ -2,10 +2,9 @@
 
 cd "$(dirname "$0")"
 cd ..
-P=$(pwd)
+FOLDER=$(pwd)"/refresh.sh"
 cd - >/dev/null
-echo $P
-exit
+
 
 if [ "$( whoami )" != "root" ]
   then
