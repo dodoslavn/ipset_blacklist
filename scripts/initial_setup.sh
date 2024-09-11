@@ -1,11 +1,23 @@
 #!/bin/bash
 
+cd "$(dirname "$0")"
 
+if [ "$( whoami )" != "root" ]
+  then
+  echo "ERROR: You need to be root!"
+  exit 2
+  fi
 
+if ! [ -a "../conf/main.conf" ]
+  then
+  echo "ERROR: Conf file not found!"
+  exit 1
+  fi
 
+. ../conf/main.conf
 
-cat ../conf/"$SERVICE_NAME".service > /etc/systemd/system/"$SERVICE_NAME".service
-cat ../conf/"$SERVICE_NAME".timer > /etc/systemd/system/"$SERVICE_NAME".timer
+. ../conf/custom-ipset_blacklist.service.sh > /etc/systemd/system/"$SERVICE_NAME".service
+. ../conf/custom-ipset_blacklist.timer.sh > /etc/systemd/system/"$SERVICE_NAME".timer
 
 systemctl daemon-reload
 systemctl enable $SERVICE_NAME
