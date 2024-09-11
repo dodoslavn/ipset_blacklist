@@ -3,7 +3,7 @@
 cd "$(dirname "$0")"
 cd ..
 P=$(pwd)
-cd -
+cd - >/dev/null
 echo $P
 exit
 
