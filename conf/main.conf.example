@@ -1,3 +1,5 @@
+SERVICE_NAME="custom-ipset_blacklist"
+
 COUNTRY_URL="http://www.ipdeny.com/ipblocks/data/aggregated"
 COUNTRY_FILE="/tmp/bl_country"
 COUNTRY_RULE="DROP"
