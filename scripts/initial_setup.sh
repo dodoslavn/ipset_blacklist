@@ -1,6 +1,11 @@
 #!/bin/bash
 
 cd "$(dirname "$0")"
+cd ..
+P=$(pwd)
+cd -
+echo $P
+exit
 
 if [ "$( whoami )" != "root" ]
   then
