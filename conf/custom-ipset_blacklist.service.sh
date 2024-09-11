@@ -3,7 +3,7 @@ Description=Custom script to refresh blocked IP addresses and subnets for firewa
 
 [Service]
 Type=simple
-ExecStart=/opt/git/host_jump_keys/scripts/refresh.sh
+ExecStart='$FOLDER'
 
 [Install]
 WantedBy=timers.target'
