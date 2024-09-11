@@ -1,5 +1,5 @@
 SERVICE='[Unit]
-Description=Custom script to refresh ssh key
+Description=Custom script to refresh blocked IP addresses and subnets for firewall
 
 [Service]
 Type=simple
