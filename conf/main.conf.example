@@ -4,7 +4,7 @@ COUNTRY_URL="http://www.ipdeny.com/ipblocks/data/aggregated"
 COUNTRY_FILE="/tmp/bl_country"
 COUNTRY_RULE="DROP"
 COUNTRY_IPSETNAME="blacklist_country_"
-COUNTRY_BLOCK="ru cn br in"
+COUNTRY_BLOCK="ru cn br in by"
 
 SMAPHAUS_URL="https://www.spamhaus.org/drop/drop.txt"
 SPAMHAUS_TMPFILE="/tmp/bl_spamhaus.txt"
