@@ -27,6 +27,6 @@ echo "$SERVICE" > /etc/systemd/system/"$SERVICE_NAME".service
 echo "$TIMER" > /etc/systemd/system/"$SERVICE_NAME".timer
 
 systemctl daemon-reload
-systemctl enable $SERVICE_NAME
-systemctl start $SERVICE_NAME 
+systemctl enable "$SERVICE_NAME".timer
+systemctl start "$SERVICE_NAME".timer
 systemctl status $SERVICE_NAME 
