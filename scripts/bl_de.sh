@@ -36,6 +36,13 @@ if [ -z "$( iptables-save | grep $DE_IPSETNAME )" ]
   iptables -I INPUT 1 -m set --match-set $DE_IPSETNAME src -j $DE_RULE
   fi
 
+SIZE=$( ipset list $DE_IPSETNAME | wc -l )
+if [ $SIZE > 65000 ]
+    then
+    echo "WARNING: Size of this IPset is too big ($SIZE), flushing it"
+    ipset flush $DE_IPSETNAME
+    fi
+
 wget $DE_URL -O $DE_TMPFILE
 
 DE_CURRENT="$( ipset list $DE_IPSETNAME )"
