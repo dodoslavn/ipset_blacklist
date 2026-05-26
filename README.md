@@ -26,5 +26,16 @@ Modify systemd service name which will run this script if you want
 Run the installation script  
 > ./scripts/initial_setup.sh
 
-Check if the script is running  
+## Verification
+
+Check state of the systemd service
 > systemctl status custom-ipset_blacklist
+
+Check the output of the systemd service
+> journalctl -u custom-ipset_blacklist
+
+Check if rules with ipsets are in iptables
+> ipset list
+
+Check if the ipsets are applied to some iptable rule
+> iptables -L -n | grep match-set
