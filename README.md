@@ -1,2 +1,1 @@
-# ipset_blocklist
-My way of blocklisting IPs in iptables
+# Tool for blacklisting of IPs marked for scam/spam activities
