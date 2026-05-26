@@ -1,5 +1,5 @@
 # Tool for blacklisting of IPs marked for scam/spam activities
-Script which will update and apply latest list of IP marked for bad activities to you system. 
+Script which will update and apply latest list of IPs marked for bad activities to your system. IPs on the list wont be able to make connection to your system.
 ## Supported lists:
 - Spamhaus
 - Blocklist.de
