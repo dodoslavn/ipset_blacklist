@@ -1,6 +1,8 @@
 #!/bin/bash
 
 cd "$(dirname "$0")"
+SCRIPT_NAME="$(basename "$0")"
+TMP_FILE="../tmp/"$SCRIPT_NAME".txt"
 
 if [ "$( whoami )" != "root" ]
   then
@@ -8,28 +10,19 @@ if [ "$( whoami )" != "root" ]
   exit 2
   fi
 
-if ! [ -a "../conf/main.conf" ]
-  then
-  echo "ERROR: Conf file not found!"
-  exit 1
-  fi
+rm -f $TMP_FILE 2>/dev/null
 
-. ../conf/main.conf
-
-rm -f $COUNTRY_FILE".txt" 2>/dev/null
-
-if [ -a "$COUNTRY_FILE.txt" ]
+if [ -a "$TMP_FILE" ]
   then
   echo "ERROR: Cannot refresh data!"
   exit 2
   fi
 
-wget $COUNTRY_URL -O $COUNTRY_FILE".txt"
+wget $COUNTRY_URL -O $TMP_FILE
 
-COUNTRY_COMPLETELIST="$( grep "aggregated.zone" $COUNTRY_FILE".txt" | cut -d'"' -f2 | cut -d'-' -f1 )"
+COUNTRY_COMPLETELIST="$( grep "aggregated.zone" $TMP_FILE | cut -d'"' -f2 | cut -d'-' -f1 )"
 
 echo "INFO: Found list of "$( echo "$COUNTRY_COMPLETELIST" | wc -l )" countries"
-
 
 for COUNTRY_NAME in $COUNTRY_BLOCK
   do
@@ -38,7 +31,7 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
     echo "ERROR: Country $COUNTRY_NAME was not found in the list!"
     exit 2
     fi
-  wget "http://www.ipdeny.com/ipblocks/data/aggregated/"$COUNTRY_NAME"-aggregated.zone" -O $COUNTRY_FILE"_"$COUNTRY_NAME".txt"
+  wget "http://www.ipdeny.com/ipblocks/data/aggregated/"$COUNTRY_NAME"-aggregated.zone" -O $TMP_FILE.$COUNTRY_NAME
   if [ -z $( ipset list -n | grep ^"$COUNTRY_IPSETNAME""$COUNTRY_NAME"$ ) ]
     then
     echo "WARNING: IPset "$COUNTRY_IPSETNAME""$COUNTRY_NAME" doesnt exist, creating new"
@@ -55,7 +48,7 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
   C_OLD=0
   COUNTRY_CURRENT="$( ipset list "$COUNTRY_IPSETNAME""$COUNTRY_NAME" | grep ^[0-9] )"
   #IFS=$'\n'
-  for SUBNET in $( cat $COUNTRY_FILE"_"$COUNTRY_NAME".txt" )
+  for SUBNET in $( cat $TMP_FILE.$COUNTRY_NAME )
     do
     if [ -z "$( echo "$COUNTRY_CURRENT" | grep "$SUBNET" )" ]
       then
@@ -78,9 +71,8 @@ for COUNTRY_NAME in $COUNTRY_BLOCK
     fi
     
   echo "INFO: $C subnets were already added to $COUNTRY_NAME."
-  rm -f $COUNTRY_FILE"_"$COUNTRY_NAME".txt"
+  rm -f $TMP_FILE.$COUNTRY_NAME 
 
   done
   
-rm -f $COUNTRY_FILE".txt"
-
+rm -f $TMP_FILE
