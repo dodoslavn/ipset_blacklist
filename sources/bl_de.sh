@@ -1,6 +1,9 @@
 #!/bin/bash
 
 cd "$(dirname "$0")"
+SCRIPT_NAME=$1
+echo $SCRIPT_NAME
+exit
 
 if [ "$( whoami )" != "root" ]
   then
@@ -16,7 +19,7 @@ if ! [ -a "../conf/main.conf" ]
 
 . ../conf/main.conf
 
-rm -f $DE_TMPFILE 2>/dev/null
+rm -f ../tmp/$DE_TMPFILE 2>/dev/null
 
 if [ -a "$DE_TMPFILE" ]
   then
