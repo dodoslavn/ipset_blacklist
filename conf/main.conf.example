@@ -1,19 +1,17 @@
-SERVICE_NAME="custom-ipset_blacklist"
+export SERVICE_NAME="custom-ipset_blacklist"
 
-LIST="bl_countries bl_de bl_spamhaus"
+LIST="de spamhaus countries"
+export $LIST
 
-COUNTRY_URL="http://www.ipdeny.com/ipblocks/data/aggregated"
-#COUNTRY_FILE="bl_country"
-COUNTRY_RULE="DROP"
-COUNTRY_IPSETNAME="blacklist_country_"
-COUNTRY_BLOCK="ru cn br in by"
+export export COUNTRY_URL="http://www.ipdeny.com/ipblocks/data/aggregated"
+export COUNTRY_RULE="DROP"
+export COUNTRY_IPSETNAME="blacklist_country_"
+export COUNTRY_BLOCK="ru cn br in by"
 
-SMAPHAUS_URL="https://www.spamhaus.org/drop/drop.txt"
-#SPAMHAUS_TMPFILE="/tmp/bl_spamhaus.txt"
-SPAMHAUS_RULE="DROP"
-SPAMHAUS_IPSETNAME="blacklist_spamhaus"
+export SMAPHAUS_URL="https://www.spamhaus.org/drop/drop.txt"
+export SPAMHAUS_RULE="DROP"
+export SPAMHAUS_IPSETNAME="blacklist_spamhaus"
 
-DE_URL="https://lists.blocklist.de/lists/all.txt"
-#DE_TMPFILE="/tmp/bl_de.txt"
-DE_RULE="DROP"
-DE_IPSETNAME="blacklist_de"
+export DE_URL="https://lists.blocklist.de/lists/all.txt"
+export DE_RULE="DROP"
+export DE_IPSETNAME="blacklist_de"
