@@ -1,8 +1,7 @@
 #!/bin/bash
 
-date
-
-git pull
+#date
+#git pull
 
 cd "$(dirname "$0")"
 
