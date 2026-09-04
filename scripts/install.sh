@@ -18,6 +18,14 @@ if ! [ -a "../conf/main.conf" ]
   exit 1
   fi
 
+which ipset
+RC=$?
+if [ "$RC" -ne 0 ]
+	then
+	echo "INFO: Installing package ipset via APT"
+	apt-get install ipset -y
+	fi
+
 . ../conf/main.conf
 
 . ../conf/custom-ipset_blacklist.service.sh 
