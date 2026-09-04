@@ -17,14 +17,15 @@ if ! [ -a "../conf/main.conf" ]
   exit 1
   fi
 
+. ../conf/main.conf
+
+mkdir -p ../tmp/
+
 for S in $LIST
   do
   echo '###########'
   echo '###' $S
   ../sources/"$S".sh
   done
-#./bl_countries.sh
-#./bl_de.sh
-#./bl_spamhaus.sh
 
 echo "##################"
