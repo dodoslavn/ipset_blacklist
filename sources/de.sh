@@ -1,9 +1,8 @@
 #!/bin/bash
 
 cd "$(dirname "$0")"
-SCRIPT_NAME=$1
-echo $SCRIPT_NAME
-exit
+SCRIPT_NAME="$(basename "$0")"
+TMP_FILE="../tmp/"$SCRIPT_NAME".txt"
 
 if [ "$( whoami )" != "root" ]
   then
@@ -11,17 +10,9 @@ if [ "$( whoami )" != "root" ]
   exit 2
   fi
 
-if ! [ -a "../conf/main.conf" ]
-  then
-  echo "ERROR: Conf file not found!"
-  exit 1
-  fi
+rm -f $TMP_FILE 2>/dev/null
 
-. ../conf/main.conf
-
-rm -f ../tmp/$DE_TMPFILE 2>/dev/null
-
-if [ -a "$DE_TMPFILE" ]
+if [ -a "$TMP_FILE" ]
   then
   echo "ERROR: Cannot refresh data!"
   exit 2
@@ -40,19 +31,20 @@ if [ -z "$( iptables-save | grep $DE_IPSETNAME )" ]
   fi
 
 SIZE=$( ipset list $DE_IPSETNAME | wc -l )
-if [ $SIZE > 65000 ]
+if [ "$SIZE" -gt 65000 ]
     then
     echo "WARNING: Size of this IPset is too big ($SIZE), flushing it"
     ipset flush $DE_IPSETNAME
     fi
 
-wget $DE_URL -O $DE_TMPFILE
+wget $DE_URL -O $TMP_FILE
+
 
 DE_CURRENT="$( ipset list $DE_IPSETNAME )"
 
 C=0
 C_OLD=0
-for SUBNET in $( grep '\.' $DE_TMPFILE )
+for SUBNET in $( grep '\.' $TMP_FILE )
   do
   if [ -z "$( echo "$DE_CURRENT" | grep "$SUBNET" )" ]
     then
@@ -75,4 +67,4 @@ if [ "$C" -gt 0 ]
   echo
   fi
 echo "INFO: $C subnets were already added."
-rm -f $DE_TMPFILE
+rm -f $TMP_FILE
